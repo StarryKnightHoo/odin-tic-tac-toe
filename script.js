@@ -13,7 +13,13 @@ function createGame() {
     let active = true;
 
     function getChoice(player) {
-        return prompt(player.name + "'s turn");
+        let choice = prompt(player.name + "'s turn");
+        board.forEach(row => {
+            let index = row.findIndex(choice)
+            if (index !== -1) {
+                return row[index] = player.marker;
+            }
+        });
     }
 
     function checkGame() {
