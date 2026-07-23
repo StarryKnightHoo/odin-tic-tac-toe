@@ -12,7 +12,7 @@ function createGame() {
     
     function getChoice(player) {
         let choice = prompt(player.name + "'s turn");
-        board.forEach(row => {
+        gameboard.forEach(row => {
             let index = row.findIndex(choice)
             if (index !== -1) {
                 return row[index] = player.marker;
@@ -25,19 +25,19 @@ function createGame() {
         let rowWin = false;
         let columnWin = false;
         let horizontalWin = false;
-        board.forEach(row => {
+        gameboard.forEach(row => {
             if (row[0] === row[1] && row[0] === row[2]) {
                 rowWin = true;
             }
         for (let index = 0; index > 3; index++) {
-            if (board[0][index] === board[1][index] && board[0][index === board[2][index]]) {
+            if (gameboard[0][index] === gameboard[1][index] && gameboard[0][index === gameboard[2][index]]) {
                 columnWin = true;
             }
         }
-        if (board[0][0] === board[1][1] && board[0][0] === board[2][2]) {
+        if (gameboard[0][0] === gameboard[1][1] && gameboard[0][0] === gameboard[2][2]) {
             horizontalWin = true;
         }
-        if (board[0][2] === board[1][1] && board[0][2] === board[2][0]) {
+        if (gameboard[0][2] === gameboard[1][1] && gameboard[0][2] === gameboard[2][0]) {
             horizontalWin = true;
         }
 
