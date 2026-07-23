@@ -3,8 +3,9 @@ const gameboard = (() => {
     return board;
 })();
 
-function createPlayer() {
-
+function createPlayer(name, marker) {
+    
+    return { name, marker };
 };
 
 function createGame() {
