@@ -50,6 +50,9 @@ function createGame() {
         });
     }
 
+    function resetRound() {
+        playRound(playerOne, playerTwo);
+    }
 
 
     return {
