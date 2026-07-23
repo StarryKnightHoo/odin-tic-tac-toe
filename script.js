@@ -1,5 +1,6 @@
 const gameboard = (() => {
-    
+    let board = [["", "", ""], ["", "", ""], ["", "", ""]];
+    return board;
 })();
 
 function createPlayer() {
