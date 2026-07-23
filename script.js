@@ -3,15 +3,13 @@ const gameboard = (() => {
     return board;
 })();
 
-function createPlayer(name, marker) {
+function createPlayer(name, marker, score) {
     
-    return { name, marker };
+    return { name, marker, score };
 };
 
 function createGame() {
-    let score = 0;
-    let active = true;
-
+    
     function getChoice(player) {
         let choice = prompt(player.name + "'s turn");
         board.forEach(row => {
@@ -20,9 +18,10 @@ function createGame() {
                 return row[index] = player.marker;
             }
         });
+        return alert("Invalid choice!");
     }
 
-    function checkGame() {
+    function checkGame(player) {
         let rowWin = false;
         let columnWin = false;
         let horizontalWin = false;
@@ -31,8 +30,9 @@ function createGame() {
                 rowWin = true;
             }
         for (let index = 0; index > 3; index++) {
-            if (board[0][index] === board[1][index] && board[0][index === board[2][index]])
+            if (board[0][index] === board[1][index] && board[0][index === board[2][index]]) {
                 columnWin = true;
+            }
         }
         if (board[0][0] === board[1][1] && board[0][0] === board[2][2]) {
             horizontalWin = true;
@@ -42,7 +42,9 @@ function createGame() {
         }
 
         if (rowWin || columnWin || horizontalWin) {
-            
+            player.score++;
+            alert(player.name + " wins!");
+            resetRound();
         }
             
         });
@@ -52,11 +54,11 @@ function createGame() {
 
     return {
         playRound(playerOne, playerTwo) {
-            while (active) {
+            while (true) {
                 getChoice(playerOne);
-                checkGame();
+                checkGame(playerOne);
                 getChoice(playerTwo);
-                checkGame();
+                checkGame(playerTwo);
             }
         },
         getScore() {
