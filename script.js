@@ -65,15 +65,20 @@ function createGame(playerOne, playerTwo) {
                 checkGame(playerTwo);
             }
         },
-        getScore() {
+        getScore(player) {
+            return player.score;
 
         },
         reset() {
-
+            gameState = true;
+            gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
+            playerOne.score = 0;
+            playerTwo.score = 0;
         },
 
         resetRound() {
-
+            gameState = true;
+            gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
         }
     }
 }
