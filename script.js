@@ -34,8 +34,8 @@ function createGame() {
             if (row[0] === row[1] && row[0] === row[2]) {
                 rowWin = true;
             }
-        for (let index = 0; index > 3; index++) {
-            if (gameboard[0][index] === gameboard[1][index] && gameboard[0][index === gameboard[2][index]]) {
+        for (let index = 0; index < 3; index++) {
+            if (gameboard[0][index] === gameboard[1][index] && gameboard[0][index] === gameboard[2][index]) {
                 columnWin = true;
             }
         }
