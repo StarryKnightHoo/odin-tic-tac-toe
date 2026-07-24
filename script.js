@@ -10,6 +10,7 @@ function createPlayer(name, marker) {
 
 function createGame(playerOne, playerTwo) {
     let gameState = true;
+    let checkGameCounter = 0;
 
     function getChoice(player) {
         if (gameState) {
@@ -54,6 +55,13 @@ function createGame(playerOne, playerTwo) {
             gameState = false;
             alert(player.name + " wins!");
         }
+       
+        checkGameCounter++;
+
+        if (checkGameCounter === 9 && (!rowWin && !columnWin && !horizontalWin)) {
+            gameState = false;
+            alert("It's a draw!")
+        }
     }
 
     return {
@@ -71,6 +79,7 @@ function createGame(playerOne, playerTwo) {
         },
         reset() {
             gameState = true;
+            checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
             playerOne.score = 0;
             playerTwo.score = 0;
@@ -78,6 +87,7 @@ function createGame(playerOne, playerTwo) {
 
         resetRound() {
             gameState = true;
+            checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
         }
     }
