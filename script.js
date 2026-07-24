@@ -11,14 +11,19 @@ function createPlayer(name, marker, score) {
 function createGame() {
     
     function getChoice(player) {
-        let choice = prompt(player.name + "'s turn");
+        let choice = Number(prompt(player.name + "'s turn"));
+        let foundMatch = false
         gameboard.forEach(row => {
-            let index = row.findIndex(choice)
-            if (index !== -1) {
+            let index = row.findIndex(num => num == choice)
+            if (index != -1) {
+                foundMatch = true;
                 return row[index] = player.marker;
             }
         });
-        return alert("Invalid choice!");
+        if (foundMatch === false) {
+            alert("Invalid choice!");
+            getChoice(player);
+        }
     }
 
     function checkGame(player) {
