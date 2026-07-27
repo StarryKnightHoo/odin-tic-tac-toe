@@ -21,6 +21,7 @@ body {
   line-height: 1.5;
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+  background-color: #282b30;
 }
 
 /* 6. Improve media defaults */
@@ -63,8 +64,7 @@ h1, h2, h3, h4, h5, h6 {
 .tile {
     width: 6rem;
     height: 6rem;
-    background-color: white;
-    border: solid 2px black;
+    border: solid 2px #1e2124;
 }
 
 .tile-one,
