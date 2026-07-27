@@ -54,9 +54,34 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+.game {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 10rem;
+}
+
 .tile {
-    width: 20rem;
-    height: auto;
+    width: 6rem;
+    height: 6rem;
     background-color: white;
-    border: solid 1px black;
+    border: solid 2px black;
+}
+
+.tile-one,
+.tile-three,
+.tile-seven,
+.tile-nine {
+    border: none;
+}
+
+.tile-two,
+.tile-eight {
+    border-top: none;
+    border-bottom: none;
+}
+
+.tile-four,
+.tile-six {
+    border-left: none;
+    border-right: none;
 }
