@@ -58,6 +58,7 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+/* Container styling */
 .container {
     display: flex;
     flex-direction: column;
@@ -66,6 +67,7 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 500px;
 }
 
+/* Header styling */
 .header {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 3rem;
@@ -76,6 +78,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+/* Game container styling */
 .game {
     display: flex;
     flex-direction: column;
@@ -112,4 +115,29 @@ h1, h2, h3, h4, h5, h6 {
 .tile-six {
     border-left: none;
     border-right: none;
+}
+
+/* Button styling */
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    appearance: none;
+    -webkit-appearance: none; 
+    background-color: #222427;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 5em;
+    height: 2em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+button:hover {
+    background-color: #2e3135;
 }
