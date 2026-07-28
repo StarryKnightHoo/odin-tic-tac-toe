@@ -97,6 +97,7 @@ function createDisplay() {
     const openModalButtons = document.querySelectorAll('[data-modal-target]');
     const closeModalButtons = document.querySelectorAll('[data-modal-close]');
     const overlay = document.getElementById('overlay');
+    const form = document.getElementById('form');
 
     openModalButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -130,6 +131,23 @@ function createDisplay() {
         modal.classList.remove("active");
         overlay.classList.remove("active");
     }
+
+    form.addEventListener("submit", function(e) {
+        const modal = form.closest('.modal');
+        e.preventDefault();
+        let playerOneName = document.querySelector("#player-one").value;
+        let playerTwoName = document.querySelector("#player-two").value;
+        globalThis.playerOne = createPlayer(playerOneName, "X");
+        globalThis.playerTwo = createPlayer(playerTwoName, "O");
+        globalThis.game = createGame(globalThis.playerOne, globalThis.playerTwo);
+        
+        document.querySelector("#playerOne").textContent = playerOneName;
+        document.querySelector("#playerTwo").textContent = playerTwoName;
+
+
+        form.reset();
+        closeModal(modal);
+    });
 
 
     return {

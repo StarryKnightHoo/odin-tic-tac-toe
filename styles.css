@@ -104,6 +104,14 @@ h1, h2, h3, h4, h5, h6 {
     gap: 8em;
 }
 
+.score-container {
+    display: flex;
+}
+
+.score-container > div:last-child {
+    margin-left: 0.2em;
+}
+
 .score:hover {
     cursor: pointer;
     color: rgb(222, 221, 221);
@@ -182,6 +190,7 @@ input {
     border: none;
     border: 1px solid #282b30;
     width: 13em;
+    color: white;
 }
 
 input:hover {
