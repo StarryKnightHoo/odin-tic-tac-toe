@@ -204,6 +204,7 @@ input:user-invalid {
 
 .tile:hover {
     cursor: pointer;
+    background-color: #2e3135;
 }
 
 .tile-one,
@@ -227,7 +228,8 @@ input:user-invalid {
 
 /* Button styling */
 .restart {
-    margin-top: 4rem;
+    margin-top: 1rem;
+    margin-left: 1.8em;
 }
 
 .restart > button:first-child {
