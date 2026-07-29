@@ -54,6 +54,7 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
             player.score++;
             gameState = false;
             alert(player.name + " wins!");
+            game.resetRound();
         }
        
         checkGameCounter++;
@@ -61,14 +62,17 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         if (checkGameCounter === 9 && (!rowWin && !columnWin && !horizontalWin)) {
             gameState = false;
             alert("It's a draw!")
+            game.resetRound();
         }
     }
 
     return {
         playRound() {
+            gameState = true;
             while (gameState) {
                 getChoice(playerOne);
                 checkGame(playerOne);
+                if (!gameState) break;
                 getChoice(playerTwo);
                 checkGame(playerTwo);
             }
@@ -78,7 +82,6 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
 
         },
         reset() {
-            gameState = true;
             checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
             playerOne.score = 0;
@@ -86,9 +89,9 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         },
 
         resetRound() {
-            gameState = true;
             checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
+            game.playRound();
         }
     }
 }
@@ -99,6 +102,9 @@ function createDisplay() {
     const overlay = document.getElementById('overlay');
     const form = document.getElementById('form');
     const noInput = document.querySelector(".no-name-inputted");
+    const resetButton = document.querySelector(".restart")
+
+    resetButton.addEventListener("click", game.reset());
 
     openModalButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -158,7 +164,9 @@ function createDisplay() {
 
 
     return {
-        
+        render() {
+
+        }
     }
 }
 
