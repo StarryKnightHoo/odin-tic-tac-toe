@@ -23,6 +23,8 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
                 foundMatch = true;
                 row[index] = player.marker;
                 display.render(choice, player);
+                turnCounter++;
+                checkGameCounter++;
             }
         });
         if (foundMatch === false) {
@@ -56,9 +58,6 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
             alert(player.name + " wins!");
             game.resetRound();
         }
-       
-        checkGameCounter++;
-        turnCounter++;
 
         if (checkGameCounter === 9 && (!rowWin && !columnWin && !horizontalWin)) {
             alert("It's a draw!")
@@ -87,6 +86,7 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         },
 
         reset() {
+            turnCounter = 0;
             checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
             tiles.forEach(tile => {
@@ -97,6 +97,7 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         },
 
         resetRound() {
+            turnCounter = 0;
             checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
             tiles.forEach(tile => {
