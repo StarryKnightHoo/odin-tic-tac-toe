@@ -57,6 +57,7 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
             player.score++;
             alert(player.name + " wins!");
             game.resetRound();
+            display.updateScore(player, turnCounter);
         }
 
         if (checkGameCounter === 9 && (!rowWin && !columnWin && !horizontalWin)) {
@@ -114,6 +115,8 @@ function createDisplay() {
     const form = document.getElementById('form');
     const noInput = document.querySelector(".no-name-inputted");
     const resetButton = document.querySelector(".restart");
+    const playerOneScore = document.querySelector("#player-one-score")
+    const playerTwoScore = document.querySelector("#player-two-score")
 
     openModalButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -177,6 +180,13 @@ function createDisplay() {
     return {
         render(choice, player) {
             choice.textContent = player.marker;
+        },
+        updateScore(player, turnCounter) {
+            if (turnCounter % 2 === 0) {
+                playerOneScore.textContent = player.score;
+            } else if (turnCounter % 2 === 1) {
+                playerTwoScore.textContent = player.score;
+            }
         }
     }
 }
