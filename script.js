@@ -89,6 +89,9 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         reset() {
             checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
+            tiles.forEach(tile => {
+                tile.textContent = "";
+            });
             playerOne.score = 0;
             playerTwo.score = 0;
         },
@@ -96,6 +99,9 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         resetRound() {
             checkGameCounter = 0;
             gameboard.splice(0, 3, [1, 2, 3], [4, 5, 6], [7, 8, 9]);
+            tiles.forEach(tile => {
+                tile.textContent = "";
+            });
         }
     }
 }
