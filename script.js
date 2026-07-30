@@ -12,6 +12,8 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
     let checkGameCounter = 0;
     let turnCounter = 0;
     let tiles = document.querySelectorAll(".tile");
+    const playerOneScore = document.querySelector("#player-one-score")
+    const playerTwoScore = document.querySelector("#player-two-score")
 
     function getChoice(player) {
         let choice = document.querySelector(".clicked");
@@ -29,7 +31,6 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         });
         if (foundMatch === false) {
             alert("Invalid choice!");
-            getChoice(player);
         }
     }
 
@@ -56,8 +57,8 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         if (rowWin || columnWin || horizontalWin) {
             player.score++;
             alert(player.name + " wins!");
+            display.updateScore(player, turnCounter, playerOneScore, playerTwoScore);
             game.resetRound();
-            display.updateScore(player, turnCounter);
         }
 
         if (checkGameCounter === 9 && (!rowWin && !columnWin && !horizontalWin)) {
@@ -95,6 +96,9 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
             });
             playerOne.score = 0;
             playerTwo.score = 0;
+            playerOneScore.textContent = 0;
+            playerTwoScore.textContent = 0;
+
         },
 
         resetRound() {
@@ -115,8 +119,6 @@ function createDisplay() {
     const form = document.getElementById('form');
     const noInput = document.querySelector(".no-name-inputted");
     const resetButton = document.querySelector(".restart");
-    const playerOneScore = document.querySelector("#player-one-score")
-    const playerTwoScore = document.querySelector("#player-two-score")
 
     openModalButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -181,10 +183,10 @@ function createDisplay() {
         render(choice, player) {
             choice.textContent = player.marker;
         },
-        updateScore(player, turnCounter) {
-            if (turnCounter % 2 === 0) {
+        updateScore(player, turnCounter, playerOneScore, playerTwoScore) {
+            if (turnCounter % 2 === 1) {
                 playerOneScore.textContent = player.score;
-            } else if (turnCounter % 2 === 1) {
+            } else if (turnCounter % 2 === 0) {
                 playerTwoScore.textContent = player.score;
             }
         }
