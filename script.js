@@ -12,8 +12,9 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
     let checkGameCounter = 0;
     let turnCounter = 0;
     let tiles = document.querySelectorAll(".tile");
-    const playerOneScore = document.querySelector("#player-one-score")
-    const playerTwoScore = document.querySelector("#player-two-score")
+    const playerOneScore = document.querySelector("#player-one-score");
+    const playerTwoScore = document.querySelector("#player-two-score");
+    let turn = document.querySelector(".turn-display");
 
     function getChoice(player) {
         let choice = document.querySelector(".clicked");
@@ -81,16 +82,15 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
                     if (turnCounter % 2 === 0) {
                         getChoice(playerOne);
                         checkGame(playerOne);
+                        display.displayTurn(playerTwo, turnCounter);
                     } else if (turnCounter % 2 === 1) {
                         getChoice(playerTwo);
                         checkGame(playerTwo);
+                        display.displayTurn(playerOne, turnCounter);
                     }
                     tile.classList.remove("clicked");
                 })
         });
-        },
-        getScore(player) {
-            return player.score;
         },
 
         reset() {
@@ -104,6 +104,7 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
             playerTwo.score = 0;
             playerOneScore.textContent = 0;
             playerTwoScore.textContent = 0;
+            turn.textContent = playerOne.name + "'s Turn";
 
         },
 
@@ -114,6 +115,19 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
             tiles.forEach(tile => {
                 tile.textContent = "";
             });
+            turn.textContent = playerOne.name + "'s Turn";
+        },
+
+        getTurn(turnCounter) {
+            return turnCounter;
+        },
+
+        getPlayerOneName(playerOne) {
+            return playerOne.name;
+        },
+
+        getPlayerTwoName(playerTwo) {
+            return playerTwo.name;
         }
     }
 }
@@ -125,6 +139,7 @@ function createDisplay() {
     const form = document.getElementById('form');
     const noInput = document.querySelector(".no-name-inputted");
     const resetButton = document.querySelector(".restart");
+    const turn = document.querySelector(".turn-display");
 
     openModalButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -166,8 +181,8 @@ function createDisplay() {
         let playerTwoName = document.querySelector("#player-two").value;
         globalThis.playerOne = createPlayer(playerOneName, "X");
         globalThis.playerTwo = createPlayer(playerTwoName, "O");
+        turn.textContent = globalThis.playerOne.name + "'s Turn";
         globalThis.game = createGame(globalThis.playerOne, globalThis.playerTwo);
-        
         document.querySelector("#playerOne").textContent = playerOneName;
         document.querySelector("#playerTwo").textContent = playerTwoName;
 
@@ -179,6 +194,7 @@ function createDisplay() {
     if (noInput) {
         globalThis.playerOne = createPlayer("Player 1", "X");
         globalThis.playerTwo = createPlayer("Player 2", "O");
+        turn.textContent = globalThis.playerOne.name + "'s Turn";
         globalThis.game = createGame(globalThis.playerOne, globalThis.playerTwo);
         globalThis.game.playRound(globalThis.playerOne, globalThis.playerTwo);
     }
@@ -195,6 +211,9 @@ function createDisplay() {
             } else if (turnCounter % 2 === 0) {
                 playerTwoScore.textContent = player.score;
             }
+        },
+        displayTurn(player, turnCounter) {
+            turn.textContent = player.name + "'s Turn";
         }
     }
 }
