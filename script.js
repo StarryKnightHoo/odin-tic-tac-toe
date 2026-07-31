@@ -8,13 +8,38 @@ function createPlayer(name, marker) {
     return { name, marker, score: 0 };
 };
 
-function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
+function createGame() {
+    
+    const playerOne = createPlayer("Player 1", "X");
+    const playerTwo = createPlayer("Player 2", "O");
+   
+    const gameLogic = createLogic(playerOne, playerTwo);
+    const display = createDisplay(playerOne, playerTwo, gameLogic);
+   
+    gameLogic.setDisplay(display);
+    gameLogic.playRound(playerOne, playerTwo);
+
+    return {
+        getGameLogic(gameLogic) {
+            return gameLogic;
+        },
+        getPlayerOne(playerOne) {
+            return playerOne;
+        },
+        getPlayerTwo(playerTwo) {
+            return playerTwo;
+        }
+    }
+}
+
+function createLogic(playerOne = "Player 1", playerTwo = "Player 2") {
     let checkGameCounter = 0;
     let turnCounter = 0;
     let tiles = document.querySelectorAll(".tile");
     const playerOneScore = document.querySelector("#player-one-score");
     const playerTwoScore = document.querySelector("#player-two-score");
     let turn = document.querySelector(".turn-display");
+    let display;
 
     function getChoice(player) {
         let choice = document.querySelector(".clicked");
@@ -62,19 +87,22 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
             }, 10);
             display.updateScore(player, turnCounter, playerOneScore, playerTwoScore);
             setTimeout(function () {
-                game.resetRound();
+                logic.resetRound();
             }, 10);
         }
 
         if (checkGameCounter === 9 && (!rowWin && !columnWin && !horizontalWin)) {
             setTimeout(function () {
                 alert("It's a draw!")
-                game.resetRound();
+                logic.resetRound();
             }, 10);
         }
     }
 
-    return {
+    const logic = {
+        setDisplay(displayObject) {
+            display = displayObject;
+            },
         playRound(playerOne, playerTwo) {
             tiles.forEach(tile => {
                 tile.addEventListener("click", () => {
@@ -120,19 +148,13 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
 
         getTurn(turnCounter) {
             return turnCounter;
-        },
-
-        getPlayerOneName(playerOne) {
-            return playerOne.name;
-        },
-
-        getPlayerTwoName(playerTwo) {
-            return playerTwo.name;
         }
-    }
+    };
+
+    return logic;
 }
 
-function createDisplay() {
+function createDisplay(playerOne, playerTwo, gameLogic) {
     const openModalButtons = document.querySelectorAll('[data-modal-target]');
     const closeModalButtons = document.querySelectorAll('[data-modal-close]');
     const overlay = document.getElementById('overlay');
@@ -179,9 +201,9 @@ function createDisplay() {
         e.preventDefault();
         let playerOneName = document.querySelector("#player-one").value;
         let playerTwoName = document.querySelector("#player-two").value;
-        globalThis.playerOne.name = playerOneName;
-        globalThis.playerTwo.name = playerTwoName;
-        turn.textContent = globalThis.playerOne.name + "'s Turn";
+        playerOne.name = playerOneName;
+        playerTwo.name = playerTwoName;
+        turn.textContent = playerOne.name + "'s Turn";
         document.querySelector("#playerOne").textContent = playerOneName;
         document.querySelector("#playerTwo").textContent = playerTwoName;
 
@@ -189,16 +211,10 @@ function createDisplay() {
         form.reset();
         closeModal(modal);
     });
+   
+    turn.textContent = playerOne.name + "'s Turn";
 
-    if (noInput) {
-        globalThis.playerOne = createPlayer("Player 1", "X");
-        globalThis.playerTwo = createPlayer("Player 2", "O");
-        turn.textContent = globalThis.playerOne.name + "'s Turn";
-        globalThis.game = createGame(globalThis.playerOne, globalThis.playerTwo);
-        globalThis.game.playRound(globalThis.playerOne, globalThis.playerTwo);
-    }
-
-    resetButton.addEventListener("click", game.reset);
+    resetButton.addEventListener("click", gameLogic.reset);
 
     return {
         render(choice, player) {
@@ -217,7 +233,7 @@ function createDisplay() {
     }
 }
 
-display = createDisplay();
+game = createGame();
 
 
 
