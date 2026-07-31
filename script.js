@@ -179,10 +179,9 @@ function createDisplay() {
         e.preventDefault();
         let playerOneName = document.querySelector("#player-one").value;
         let playerTwoName = document.querySelector("#player-two").value;
-        globalThis.playerOne = createPlayer(playerOneName, "X");
-        globalThis.playerTwo = createPlayer(playerTwoName, "O");
+        globalThis.playerOne.name = playerOneName;
+        globalThis.playerTwo.name = playerTwoName;
         turn.textContent = globalThis.playerOne.name + "'s Turn";
-        globalThis.game = createGame(globalThis.playerOne, globalThis.playerTwo);
         document.querySelector("#playerOne").textContent = playerOneName;
         document.querySelector("#playerTwo").textContent = playerTwoName;
 
