@@ -22,9 +22,9 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
         gameboard.forEach(row => {
             let index = row.findIndex(num => num == choiceId)
             if (index != -1) {
-                foundMatch = true;
-                row[index] = player.marker;
                 display.render(choice, player);
+                row[index] = player.marker;
+                foundMatch = true;
                 turnCounter++;
                 checkGameCounter++;
             }
@@ -56,14 +56,20 @@ function createGame(playerOne = "Player 1", playerTwo = "Player 2") {
 
         if (rowWin || columnWin || horizontalWin) {
             player.score++;
-            alert(player.name + " wins!");
+            setTimeout(function () {
+                alert(player.name + " wins!");
+            }, 10);
             display.updateScore(player, turnCounter, playerOneScore, playerTwoScore);
-            game.resetRound();
+            setTimeout(function () {
+                game.resetRound();
+            }, 10);
         }
 
         if (checkGameCounter === 9 && (!rowWin && !columnWin && !horizontalWin)) {
-            alert("It's a draw!")
-            game.resetRound();
+            setTimeout(function () {
+                alert("It's a draw!")
+                game.resetRound();
+            }, 10);
         }
     }
 
